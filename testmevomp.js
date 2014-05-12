@@ -95,76 +95,83 @@
           clickreason: false
         }
       ],
-
+ 
       getReferenceItem = function() {
-        var refItemDetail = getItemsOfType('clickreason').first(),
+        var refItemDetail = getItemsOfType('clickreason', $(module.base)).first(),
             refItem,
             listelementSelector = module.baselist + ' > li';
-
+ 
         if(refItemDetail[0]) {
           refItem = refItemDetail.parentsUntil(module.base, listelementSelector);
         }else{
           refItem = $(module.base).find(listelementSelector).first();
         }
-
+ 
         return refItem;
       },
-
-      getItemsOfType = function(type) {
+ 
+      getItemsOfType = function(type, baselist) {
         var items,
-            selectorBase = $(module.baselist);
-
+            selectorBase = baselist || $(module.baselist);
+ 
         if(module[type]) {
           items = selectorBase.find(module[type]);
         }
         return items;
       },
-
+ 
       addStyles = function() {
         /* before we start do some style to show the example type label for further QA referencing
          https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet.insertRule */
         var styleEl = document.createElement("style");
-
+ 
         document.head.appendChild(styleEl);
         styleEl.appendChild(document.createTextNode("")); // Apparently some version of Safari needs the following line? I dunno.
         styleEl.sheet.insertRule('li.user-card[title]:after {content: attr(title);position: absolute;right: -239px;width: 200px;border-left: 20px solid #FFF;padding-left: 5px;top: 20px;color: #D2691E; }', 0);
       };
-
-/* take care of different pagetypes */
-  /* vomp startpage */
-  if( $('#premium-module')[0] ){
-    module.baselist = '#premium-module ul';
-    module.base     = '#premium-module';
-  }
-
-  /* vomp, network */
-  if( $('[data-user-detail-list]')[0] ){
-    module.baselist = '[data-user-detail-list]';
-  }
-
+ 
+  /* take care of different pagetypes */
+  Object.defineProperty(module, 'base', {
+    get: function() {
+ 
+      /* vomp startpage */
+      if( $('#premium-module')[0] ){
+        module.baselist = '#premium-module ul';
+        return '#premium-module';
+      }
+ 
+      /* vomp, network */
+      if( $('[data-user-detail-list]')[0] ){
+        module.baselist = '[data-user-detail-list]';
+      }
+ 
+      return 'body';
+    }
+  });
+ 
   addStyles();
-
+ 
   /* duplicate the reference item for every example
      and replace the reference data with the testdata */
   examples.forEach(function(example){
     var refItem        = getReferenceItem(),
         _clonedRefItem = refItem.clone(true),
         mockItems      = Object.keys(example);
-
+ 
     /* replace/delete data */
     mockItems.forEach(function(type){
       switch(type) {
         case 'type'   : /* add a title attribute */
                         _clonedRefItem.attr('title', example[type]);
                         break;
-
+ 
         case 'badges' : if(example[type] === false) {
                           getItemsOfType(type, _clonedRefItem).remove();
                         }else{
                           getItemsOfType(type, _clonedRefItem).html(badges[example[type]]);
                         }
                         break;
-
+ 
         default       : if(example[type]) {
                           getItemsOfType(type, _clonedRefItem).html(example[type]);
                         } else {
@@ -172,8 +179,8 @@
                         }
       }
     });
-
+ 
     $(module.baselist).append(_clonedRefItem);
   });
-
+ 
 })(jQuery);
