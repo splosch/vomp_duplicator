@@ -1,0 +1,4 @@
+<div class="bookmarklet">
+  <a href='http://(function(e,a,g,h,f,c,b,d){if(!(f=e.jQuery)||g>f.fn.jquery||h(f)){c=a.createElement("script");c.type="text/javascript";c.src="http://ajax.googleapis.com/ajax/libs/jquery/"+g+"/jquery.min.js";c.onload=c.onreadystatechange=function(){if(!b&&(!(d=this.readyState)||d=="loaded"||d=="complete")){h((f=e.jQuery).noConflict(1),b=1);f(c).remove()}};a.documentElement.childNodes[0].appendChild(c)}})(window,document,"1.3.2",function($,L){javascript:(function(){if(!($=window.jQuery)){script=document.createElement("script");script.src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";script.onload=releasetheKraken;document.body.appendChild(script)}else{a(jQuery)}function a(d){var c=document.createElement("script"),b="https://raw.githubusercontent.com/splosch/codedropbox/master/testmevomp.js";c.src=b;d("body").append(c)}}());});'>Run jQuery Code</a>
+  <div style="clear:both;"></div>
+</div>
