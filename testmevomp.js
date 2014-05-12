@@ -130,19 +130,17 @@
         styleEl.sheet.insertRule('li.user-card[title]:after {content: attr(title);position: absolute;right: -239px;width: 200px;border-left: 20px solid #FFF;padding-left: 5px;top: 20px;color: #D2691E; }', 0);
       };
 
-  /* take care of different pagetypes */
-    /* vomp startpage */
-    if( $('#premium-module')[0] ){
-      module.baselist = '#premium-module ul';
-      module.base     = '#premium-module';
-    }
+/* take care of different pagetypes */
+  /* vomp startpage */
+  if( $('#premium-module')[0] ){
+    module.baselist = '#premium-module ul';
+    module.base     = '#premium-module';
+  }
 
-    /* vomp, network */
-    if( $('[data-user-detail-list]')[0] ){
-      module.baselist = '[data-user-detail-list]';
-    }
-
-  });
+  /* vomp, network */
+  if( $('[data-user-detail-list]')[0] ){
+    module.baselist = '[data-user-detail-list]';
+  }
 
   addStyles();
 
@@ -179,4 +177,3 @@
   });
 
 })(jQuery);
-
