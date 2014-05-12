@@ -101,6 +101,8 @@
             refItem,
             listelementSelector = module.baselist + ' > li';
 
+        debugger;
+
         if(refItemDetail[0]) {
           refItem = refItemDetail.parentsUntil(module.base, listelementSelector);
         }else{
