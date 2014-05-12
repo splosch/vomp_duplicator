@@ -97,7 +97,7 @@
       ],
 
       getReferenceItem = function() {
-        var refItemDetail = getItemsOfType('clickreason', $(module.base)).first(),
+        var refItemDetail = getItemsOfType('clickreason').first(),
             refItem,
             listelementSelector = module.baselist + ' > li';
 
@@ -110,9 +110,9 @@
         return refItem;
       },
 
-      getItemsOfType = function(type, baselist) {
+      getItemsOfType = function(type) {
         var items,
-            selectorBase = baselist || $(module.baselist);
+            selectorBase = $(module.baselist);
 
         if(module[type]) {
           items = selectorBase.find(module[type]);
@@ -131,22 +131,17 @@
       };
 
   /* take care of different pagetypes */
-  Object.defineProperty(module, 'base', {
-    get: function() {
-
-      /* vomp startpage */
-      if( $('#premium-module')[0] ){
-        module.baselist = '#premium-module ul';
-        return '#premium-module';
-      }
-
-      /* vomp, network */
-      if( $('[data-user-detail-list]')[0] ){
-        module.baselist = '[data-user-detail-list]';
-      }
-
-      return 'body';
+    /* vomp startpage */
+    if( $('#premium-module')[0] ){
+      module.baselist = '#premium-module ul';
+      module.base     = '#premium-module';
     }
+
+    /* vomp, network */
+    if( $('[data-user-detail-list]')[0] ){
+      module.baselist = '[data-user-detail-list]';
+    }
+
   });
 
   addStyles();
