@@ -97,7 +97,7 @@
       ],
 
       getReferenceItem = function() {
-        var refItemDetail = getItemsOfType('clickreason').first(),
+        var refItemDetail = getItemsOfType('clickreason', module.base).first(),
             refItem,
             listelementSelector = module.baselist + ' > li';
 
