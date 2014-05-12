@@ -102,7 +102,7 @@
             listelementSelector = module.baselist + ' > li';
 
         if(refItemDetail[0]) {
-          refItem = refDetail.parentsUntil(module.base, listelementSelector);
+          refItem = refItemDetail.parentsUntil(module.base, listelementSelector);
         }else{
           refItem = $(module.base).find(listelementSelector).first();
         }
