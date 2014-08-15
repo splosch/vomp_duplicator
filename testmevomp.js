@@ -3,9 +3,9 @@
         base: 'body',
         baselist: 'ul',
         listelements: 'ul > li',
-        name: 'a[href^="/profile"].on-outer-hover',
-        badges: 'a[href^="/profile"].on-outer-hover + *',
-        position: 'a[href^="/profile"].on-outer-hover ~ div',
+        name: 'a[href^="/profile"].user-card__name',
+        badges: 'a[href^="/profile"].user-card__name + *',
+        position: 'a[href^="/profile"].user-card__name ~ div',
         company: 'a[href^="/go/company"]',
         clickreason: 'p'
       },
