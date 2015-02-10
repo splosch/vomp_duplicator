@@ -1,11 +1,15 @@
-h1.VOMP - Bookmarklet
+Bookmarklet for xing.com variant testing
+======
 
-Since github flavored markdown does not support `javascript:` in links
-replace 'http://' with 'javascript:' ... once added to favorites
+This Bookmarklet calls a duplicator script using some heuristics that allow testing of multiple variants of the same element in the VOMP box on xing.com startpage. Since this element is quite fragile, each time we touch it these variants will help to prevent the layout from breaking.
 
-<a href='http://(function(){if(!($=window.jQuery)){script=document.createElement("script");script.src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";script.onload=a(jQuery);document.body.appendChild(script)}else{a(jQuery)}function a(d){var c=document.createElement("script"),b="https://raw.githubusercontent.com/splosch/codedropbox/master/testmevomp.js";c.src=b;d("body").appendChild(c)}}());'>VOMP - Testdata (corrected)</a>
+copy and past into a created bookmark
+------
 
---
+(unfortunately github markdown doeas not support javascript in links :)
+this bookmarklet will call the latest version of:
+`https://raw.githubusercontent.com/splosch/codedropbox/master/testmevomp.js`
 
-<a href='javascript:(function(){if(!($=window.jQuery)){script=document.createElement("script");script.src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";script.onload=a(jQuery);document.body.appendChild(script)}else{a(jQuery)}function a(d){var c=document.createElement("script"),b="https://raw.githubusercontent.com/splosch/codedropbox/master/testmevomp.js";c.src=b;d("body").appendChild(c)}}());'>VOMP - Testdata (original)</a>
+Bookmarklet code:
 
+    http://(function(){if(!($=window.jQuery)){script=document.createElement("script");script.src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";script.onload=a(jQuery);document.body.appendChild(script)}else{a(jQuery)}function a(d){var c=document.createElement("script"),b="https://raw.githubusercontent.com/splosch/codedropbox/master/testmevomp.js";c.src=b;d("body").appendChild(c)}}());
