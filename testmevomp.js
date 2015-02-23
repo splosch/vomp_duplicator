@@ -16,6 +16,7 @@
     examples = [
       {
         type: 'external google',
+        img: "/frontend_minified/img/users/deleted.64x64.jpg",
         badges: false,
         name : 'Externer Besucher ',
         position: null,
@@ -128,6 +129,7 @@
       document.head.appendChild(styleEl);
       styleEl.appendChild(document.createTextNode("")); /* Apparently some version of Safari needs the following line? I dunno. */
       styleEl.sheet.insertRule('li.user-card[title]:after {content: attr(title);position: absolute;right: -239px;width: 200px;border-left: 20px solid #FFF;padding-left: 5px;top: 20px;color: #D2691E; }', 0);
+      styleEl.sheet.insertRule('.aside-module .user-card{outline: 1px solid rgba(220, 220, 0, 0.4);} .premium-app .user-card__block--denser{outline: 2px dotted rgba(220, 0, 0, 0.05);} .premium-app .media-obj__body{outline: 1px solid rgba(220, 120, 0, 0.4);} .premium-app .user-card__block--denser .user-card__name{outline: 1px dashed rgba(220, 20, 250, 0.8);} .premium-app .user-card__details--small{background-color: rgba(250, 250, 40, 0.3);} .premium-app .user-card__wrapper--small{background-color: rgba(0, 150, 150, 0.2);}', 0);
     };
 
   /* take care of different pagetypes */
