@@ -3,11 +3,11 @@
         base: 'body',
         baselist: 'ul',
         listelements: 'ul > li',
-        name: 'a[href^="/profile"].user-card__name',
-        badges: 'a[href^="/profile"].user-card__name + *',
-        position: 'a[href^="/profile"].user-card__name ~ div',
+        name: '.user-card__name > a[href^="/profile"]',
+        badges: '.user-card__name > .user-card__badge',
+        position: 'a[href^="/profile"] ~ div.user-card__wrapper--small',
         company: 'a[href^="/go/company"]',
-        clickreason: 'p'
+        clickreason: '.user-card__name > ~ .user-card__details--small'
       },
       badges = {
         full: "<a href='/app/billing' class='icn icn-ext-premium-small' title='Premium-Mitglied'>ICN_PREMIUM_MEMBER</a><a href='/app/help?op=explanations;id=247;category_id=367#247' class='icn icn-ext-moderator-small' title='Gruppenmoderator'>ICN_GROUP_MODERATOR</a>",
