@@ -5,7 +5,7 @@
       listelements: 'ul > li',
       name: '.user-card__name > a[href^="/profile"]',
       badges: '.user-card__name > .user-card__badge',
-      position: 'a[href^="/profile"] ~ div.user-card__wrapper--small',
+      position: '.user-card__name + .user-card__wrapper--small',
       company: 'a[href^="/go/company"]',
       clickreason: '.user-card__name ~ .user-card__details--small'
     },
@@ -15,7 +15,7 @@
     },
     examples = [
       {
-        type: 'external google',
+        type: 'external visitor',
         badges: false,
         name : 'Externer Besucher ',
         position: null,
@@ -23,7 +23,7 @@
         clickreason: ' Kam von www.google.de '
       },
       {
-        type: 'all: oneliner',
+        type: 'all: one line + badge',
         badges: 'full',
         name : 'Philipp Krause ',
         position: 'Senior Frontend Engineer',
@@ -31,20 +31,68 @@
         clickreason: false
       },
       {
-        type: 'name: multiline',
+        type: 'name: two line + badge',
         badges: 'full',
-        name : 'Prof. Dr. Med. / habil. Ing.(FH) Philippaev Mattthushitz Mikael Samule Milllevitch Osthoff ',
+        name : 'Prof. Dr. Med. / habilitus. Mostrowhitz Samule Milllev',
+        position: 'Senior Frontend Engineer',
+        company: 'XING AG',
+        clickreason: false
+      },
+      {
+        type: 'name: two line edge + badge [!]',
+        badges: 'full',
+        name : 'Prof. Dr. Med. / habilitus. Mostrowhitz Samule Milllevitch ',
+        position: 'Senior Frontend Engineer',
+        company: 'XING AG',
+        clickreason: false
+      },
+      {
+        type: 'name: two line max + badge [!!]',
+        badges: 'full',
+        name : 'Prof. Dr. Med. / habilitus. Mostrowhitz Samule Milllevitchov ',
         position: 'Senior Frontend Engineer',
         company: 'XING AG',
         clickreason: false
       },
       {
         type: 'name: long non-breaking',
-        badges: 'full',
-        name : 'Philippaev MattthushitzoveniasekkytechlonDudeMattthushitzoveniasekkytechlonDude Mikael ',
+        badges: false,
+        name : 'MattthushitzDudeMattthushitzoveniasekkytechlonDude  Philippaev Mikael ',
         position: 'Senior Frontend Engineer',
         company: 'XING AG',
         clickreason: false
+      },
+      {
+        type: 'position: two line',
+        badges: false,
+        name : 'Philipp Krause ',
+        position: 'Vertriebsplanung / Vertriebscontrolling / Kaltaquise-Superkalt',
+        company: 'XING AG',
+        clickreason: false
+      },
+      {
+        type: 'position: two lines non-breaking',
+        badges: false,
+        name : 'Philipp Krause ',
+        position: 'Vertriebsplanung/und/oder/Vertriebscontrolling / Kaltaquise-Superkalt / Medium',
+        company: 'XING AG',
+        clickreason: false
+      },
+      {
+        type: 'clickreason: two lines',
+        badges: false,
+        name : 'Philipp Krause ',
+        position: 'Senior Frontend Engineer',
+        company: 'XING AG',
+        clickreason: "Hat Sie ganz gepflegt auf XING entdeckt"
+      },
+      {
+        type: 'clickreason: two lines maxed',
+        badges: false,
+        name : 'Philipp Krause ',
+        position: 'Senior Frontend Engineer',
+        company: 'XING AG',
+        clickreason: "Hat Sie ganz gepflegt auf XING entdeckt und trotzdem nicht angeklickt."
       },
       {
         type: 'clickreason: link',
@@ -52,7 +100,7 @@
         name : 'Philipp Krause ',
         position: 'Senior Frontend Engineer',
         company: 'XING AG',
-        clickreason: "Hat Sie im <a href='https://talentmanager.xing.com'>Talentmanager</a> entdeckt"
+        clickreason: "Hat Sie im <a href='https://talentmanager.xing.com'>Talentmanager</a> entdeckt und nicht angeklickt"
       },
       {
         type: 'clickreason: link with url as text',
@@ -79,20 +127,12 @@
         clickreason: "Suchte auf XING nach Name und Hat Sie im <a href='https://myfamousblog.xing.com'>SuperlongsupernotbreakingextensivelinknamingSuperlongsupernotbreakingextensivelinknaming</a> entdeckt wobei keine weiteren Erkenntnisse erkannt werden konnten."
       },
       {
-        type: 'job: multiline',
-        badges: 'one',
-        name : 'Philipp Krause ',
-        position: 'Senior Recruitment Consultant (Java) für Frankfurt und Umgebung No Joke!',
-        company: 'Huxley Associates, ein Geschäftszweig der SThree GmbH',
-        clickreason: 'Suchte auf XING nach Name'
-      },
-      {
         type: 'job: multiline, non-breaking',
         badges: 'full',
-        name : 'Philipp MattthushitzoveniasekkytechlonDudeMattthushitzoveniasekkytechlonDude',
-        position: 'MediamogulSurveySeniorConsultant (MBA/Dr/Prof)',
+        name : 'Philipp Mattthushit Zoveniasekkytechlon Dude Mattthushitzoveniasek Kytechlon Dude',
+        position: 'Mediamogul Survey SeniorConsultant (MBA/Dr/Prof)',
         company: 'Huxley Associates, ein Geschäftszweig der SThree GmbH',
-        clickreason: false
+        clickreason: "Suchte auf XING nach Name und Hat Sie im <a href='https://myfamousblog.xing.com'>SuperlongsupernotbreakingextensivelinknamingSuperlongsupernotbreakingextensivelinknaming</a> entdeckt wobei keine weiteren Erkenntnisse erkannt werden konnten."
       }
     ],
 
@@ -128,12 +168,12 @@
       document.head.appendChild(styleEl);
       styleEl.appendChild(document.createTextNode("")); /* Apparently some version of Safari needs the following line? I dunno. */
       styleEl.sheet.insertRule('li.user-card[title]:after {content: attr(title);position: absolute;right: -239px;width: 200px;border-left: 20px solid #FFF;padding-left: 5px;top: 20px;color: #D2691E; }', 0);
-      styleEl.sheet.insertRule('.aside-module .user-card{outline: 1px solid rgba(220, 220, 0, 0.4);}', 0);
+      /*styleEl.sheet.insertRule('.aside-module .user-card{outline: 1px solid rgba(220, 220, 0, 0.4);}', 0);
       styleEl.sheet.insertRule('.premium-app .user-card__block--denser{outline: 2px dotted rgba(220, 0, 0, 0.05);}', 0);
       styleEl.sheet.insertRule('.premium-app .media-obj__body{outline: 1px solid rgba(220, 120, 0, 0.4);}', 0);
       styleEl.sheet.insertRule('.premium-app .user-card__block--denser .user-card__name{outline: 1px dashed rgba(220, 20, 250, 0.8);}', 0);
       styleEl.sheet.insertRule('.premium-app .user-card__details--small{background-color: rgba(250, 250, 40, 0.3);}', 0);
-      styleEl.sheet.insertRule('.premium-app .user-card__wrapper--small{background-color: rgba(0, 150, 150, 0.2);}', 0);
+      styleEl.sheet.insertRule('.premium-app .user-card__wrapper--small{background-color: rgba(0, 150, 150, 0.2);}', 0);*/
     };
 
   /* take care of different pagetypes */
