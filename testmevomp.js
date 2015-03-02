@@ -63,6 +63,14 @@
         clickreason: false
       },
       {
+        type: 'name: long non-breaking + badge',
+        badges: 'full',
+        name : 'MattthushitzDudeMattthushitzoveniasekkytechlonDude  Philippaev Mikael ',
+        position: 'Senior Frontend Engineer',
+        company: 'XING AG',
+        clickreason: false
+      },
+      {
         type: 'position: two line',
         badges: false,
         name : 'Philipp Krause ',
