@@ -1,17 +1,21 @@
 (function($) {
+  "use strict";
+
   var module = {
       base: 'body',
-      baselist: 'ul',
+      baselist: 'h4 + ul',
       listelements: 'ul > li',
-      name: '.user-card__name > a[href^="/profile"]',
-      badges: '.user-card__name > .user-card__badge',
-      position: '.user-card__name + .user-card__wrapper--small',
-      company: 'a[href^="/go/company"]',
-      clickreason: '.user-card__name ~ .user-card__details--small'
+      name: '.component-user-name > a[href^="/profile"]',
+      badgewrapper: '.user-name-badge-wrapper',
+      badges: '.user-name-badge',
+      position: '.user-card-information > li:first-child + li',
+      company: 'a[href^="/companies/go"]',
+      clickreason: '.user-card-click-reason'
     },
     badges = {
-      full: "<a href='/app/billing' class='icn icn-ext-premium-small' title='Premium-Mitglied'>ICN_PREMIUM_MEMBER</a><a href='/app/help?op=explanations;id=247;category_id=367#247' class='icn icn-ext-moderator-small' title='Gruppenmoderator'>ICN_GROUP_MODERATOR</a>",
-      one: "<a href='/app/billing' class='icn icn-ext-premium-small' title='Premium-Mitglied'>ICN_PREMIUM_MEMBER</a>"
+      full: "<a class='user-name-badge user-name-premium' data-tooltip='Premium' href='/app/billing?op=premium_overview'>Premium</a><a class='user-name-badge user-name-moderator' data-tooltip='Moderator' href='/help/help-and-faq-2/groups-817/moderator-help-820'>Moderator</a><a class='user-name-badge user-name-ambassador' data-tooltip='Ambassador' href='https://official-events.xing.com'>Ambassador</a><a class='user-name-badge user-name-xpert' data-tooltip='Xpert' href='/app/help?op=explanations;id=434;category_id=367#434'>Xpert</a>",
+      one: "<a class='user-name-badge user-name-premium' data-tooltip='Premium' href='/app/billing?op=premium_overview'>Premium</a>"
+
     },
     examples = [
       {
@@ -24,14 +28,14 @@
       },
       {
         type: 'all: one line + badge',
-        badges: 'full',
+        badges: 'one',
         name : 'Philipp Krause ',
         position: 'Senior Frontend Engineer',
         company: 'XING AG',
         clickreason: false
       },
       {
-        type: 'name: two line + badge',
+        type: 'name: two line + badges',
         badges: 'full',
         name : 'Prof. Dr. Med. / habilitus. Mostrowhitz Samule Milllev',
         position: 'Senior Frontend Engineer',
@@ -40,14 +44,14 @@
       },
       {
         type: 'name: two line edge + badge [!]',
-        badges: 'full',
+        badges: 'one',
         name : 'Prof. Dr. Med. / habilitus. Mostrowhitz Samule Milllevitch ',
         position: 'Senior Frontend Engineer',
         company: 'XING AG',
         clickreason: false
       },
       {
-        type: 'name: two line max + badge [!!]',
+        type: 'name: two line max + badges [!!]',
         badges: 'full',
         name : 'Prof. Dr. Med. / habilitus. Mostrowhitz Samule Milllevitchov ',
         position: 'Senior Frontend Engineer',
@@ -63,8 +67,8 @@
         clickreason: false
       },
       {
-        type: 'name: long non-breaking + badge',
-        badges: 'full',
+        type: 'name: long non-breaking + badges',
+        badges: 'one',
         name : 'MattthushitzDudeMattthushitzoveniasekkytechlonDude  Philippaev Mikael ',
         position: 'Senior Frontend Engineer',
         company: 'XING AG',
@@ -190,7 +194,7 @@
 
       /* vomp startpage */
       if( $('#premium-module')[0] ){
-        module.baselist = '#premium-module ul';
+        module.baselist = '#premium-module h4 + ul';
         return '#premium-module';
       }
 
@@ -207,6 +211,7 @@
 
   /* duplicate the reference item for every example
      and replace the reference data with the testdata */
+
   examples.forEach(function(example){
     var refItem        = getReferenceItem(),
         _clonedRefItem = refItem.clone(true),
@@ -217,12 +222,20 @@
       switch(type) {
         case 'type'   : /* add a title attribute */
                         _clonedRefItem.attr('title', example[type]);
+                        _clonedRefItem.addClass("pos-rel");
                         break;
 
         case 'badges' : if(example[type] === false) {
                           getItemsOfType(type, _clonedRefItem).remove();
+                          if(module.badgewrapper) {
+                            _clonedRefItem.find(module.badgewrapper).remove();
+                          }
                         }else{
-                          getItemsOfType(type, _clonedRefItem).html(badges[example[type]]);
+                          if(module.badgewrapper) {
+                            _clonedRefItem.find(module.badgewrapper).html(badges[example[type]]);
+                          } else {
+                            getItemsOfType(type, _clonedRefItem).html(badges[example[type]]);
+                          }
                         }
                         break;
 
